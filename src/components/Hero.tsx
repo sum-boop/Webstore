@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Play, Sparkles } from "lucide-react";
+import { ArrowRight, CircleCheck as CheckCircle2, Play, Sparkles } from "lucide-react";
 
 export default function Hero() {
   return (

@@ -1,4 +1,4 @@
-import { ArrowUp, Circle, Code2, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { ArrowUp, Circle, Code as Code2, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 import { CONTACT } from "@/data/agencyData";
 
 const linkClass = "text-sm text-zinc-400 transition hover:text-white";

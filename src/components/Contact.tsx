@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, Clock, Mail, MessageCircle, Phone, Send, ShieldCheck, Sparkles } from "lucide-react";
+import { CircleCheck as CheckCircle2, Clock, Mail, MessageCircle, Phone, Send, ShieldCheck, Sparkles } from "lucide-react";
 import { CONTACT } from "@/data/agencyData";
 import type { InquiryFormData } from "@/types";
 
