@@ -1,87 +1,86 @@
 import { useState } from "react";
-import { Menu, X, Sparkles, ArrowRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, Menu, Sparkles, X } from "lucide-react";
+import { NAV_LINKS } from "@/data/agencyData";
+
 export default function Navbar() {
-const [isOpen, setIsOpen] = useState<boolean>(false);
-return (
-<header className="sticky top-0 z-50 backdrop-blur-md bg-zinc-950/80 border-b border-zinc-800/80">
-<div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-<a href="#top" aria-label="AI Stack Studio home" className="flex items-center gap-2">
-<div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 to-cyan-400 shadow-lg shadow-indigo-500/30">
-<Sparkles className="h-4 w-4 text-white" />
-</div>
-<div className="flex items-center gap-1.5 text-lg">
-<span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent font-bold tracking-tight">AI STACK</span>
-<span className="text-zinc-300 font-medium">Studio</span>
-</div>
-</a>
-    <nav className="hidden md:flex items-center gap-8">
-      <a href="#services" className="text-sm font-medium text-zinc-300 hover:text-white transition-colors">Services</a>
-      <a href="#showcase" className="text-sm font-medium text-zinc-300 hover:text-white transition-colors">Showcase</a>
-      <a href="#pricing" className="text-sm font-medium text-zinc-300 hover:text-white transition-colors">Pricing</a>
-      <a href="#contact" className="text-sm font-medium text-zinc-300 hover:text-white transition-colors">Contact</a>
-    </nav>
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    <a
-      href="#contact"
-      className="hidden md:inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500 shadow-lg shadow-indigo-500/20"
-    >
-      Get a Website
-      <ArrowRight className="h-4 w-4" />
-    </a>
+  return (
+    <header className="sticky top-0 z-50 border-b border-zinc-800/60 bg-zinc-950/70 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <a href="#top" aria-label="AI STACK Studio home" className="flex items-center gap-2.5 rounded-lg">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-cyan-400 shadow-lg shadow-indigo-500/30">
+            <Sparkles className="h-4 w-4 text-white" aria-hidden="true" />
+          </span>
+          <span className="text-lg font-bold tracking-tight">
+            <span className="gradient-text">AI STACK</span>{" "}
+            <span className="font-medium text-zinc-300">Studio</span>
+          </span>
+        </a>
 
-    <button
-      type="button"
-      onClick={() => setIsOpen(!isOpen)}
-      aria-label="Toggle menu"
-      aria-expanded={isOpen}
-      className="md:hidden text-zinc-200 hover:text-white"
-    >
-      {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-    </button>
-  </div>
+        <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((link) => (
+            <a key={link.href} href={link.href} className="text-sm font-medium text-zinc-300 transition-colors hover:text-white">
+              {link.label}
+            </a>
+          ))}
+        </nav>
 
-  {isOpen && (
-    <div className="md:hidden border-t border-zinc-800/80 bg-zinc-950/95 backdrop-blur-md">
-      <nav className="flex flex-col gap-1 px-4 py-4 sm:px-6">
-        <a
-          href="#services"
-          onClick={() => setIsOpen(false)}
-          className="rounded-md px-3 py-2 text-base font-medium text-zinc-300 hover:bg-zinc-900 hover:text-white transition-colors"
-        >
-          Services
-        </a>
-        <a
-          href="#showcase"
-          onClick={() => setIsOpen(false)}
-          className="rounded-md px-3 py-2 text-base font-medium text-zinc-300 hover:bg-zinc-900 hover:text-white transition-colors"
-        >
-          Showcase
-        </a>
-        <a
-          href="#pricing"
-          onClick={() => setIsOpen(false)}
-          className="rounded-md px-3 py-2 text-base font-medium text-zinc-300 hover:bg-zinc-900 hover:text-white transition-colors"
-        >
-          Pricing
-        </a>
         <a
           href="#contact"
-          onClick={() => setIsOpen(false)}
-          className="rounded-md px-3 py-2 text-base font-medium text-zinc-300 hover:bg-zinc-900 hover:text-white transition-colors"
+          className="hidden items-center gap-2 rounded-full bg-indigo-600 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition hover:bg-indigo-500 md:inline-flex"
         >
-          Contact
+          Get Started
+          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
         </a>
-        <a
-          href="#contact"
-          onClick={() => setIsOpen(false)}
-          className="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500 shadow-lg shadow-indigo-500/20"
+
+        <button
+          type="button"
+          onClick={() => setIsOpen((open) => !open)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
+          className="rounded-lg p-2 text-zinc-200 transition hover:bg-zinc-900 hover:text-white md:hidden"
         >
-          Get a Website
-          <ArrowRight className="h-4 w-4" />
-        </a>
-      </nav>
-    </div>
-  )}
-</header>
-);
+          {isOpen ? <X className="h-6 w-6" aria-hidden="true" /> : <Menu className="h-6 w-6" aria-hidden="true" />}
+        </button>
+      </div>
+
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            id="mobile-menu"
+            key="mobile-menu"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="overflow-hidden border-t border-zinc-800/60 bg-zinc-950/95 md:hidden"
+          >
+            <nav aria-label="Mobile" className="flex flex-col gap-1 px-4 py-4 sm:px-6">
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-lg px-3 py-2.5 text-base font-medium text-zinc-300 transition hover:bg-zinc-900 hover:text-white"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <a
+                href="#contact"
+                onClick={() => setIsOpen(false)}
+                className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition hover:bg-indigo-500"
+              >
+                Get Started
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
 }

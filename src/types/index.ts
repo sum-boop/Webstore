@@ -1,38 +1,51 @@
-export type ServiceCategory = 'Portfolio' | 'Landing Page' | 'E-Commerce' | 'Web App';
+import type { LucideIcon } from "lucide-react";
+
+export interface NavLink {
+  href: string;
+  label: string;
+}
+
 export interface ServiceItem {
-id: string;
-title: string;
-description: string;
-iconName: string;
-category: ServiceCategory;
-features: string[];
-badgeText: string;
+  id: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  features: string[];
+  tech: string[];
 }
-export interface PortfolioItem {
-id: string;
-title: string;
-clientRole: string;
-industry: string;
-description: string;
-previewImage: string;
-demoUrl: string;
-tags: string[];
+
+export type ShowcaseCategory = "Portfolios" | "Landing Pages" | "Web Apps";
+
+interface ShowcaseBase {
+  id: string;
+  title: string;
+  clientRole: string;
+  industry: string;
+  description: string;
+  highlight: string;
+  tags: string[];
+  demoUrl: string;
 }
-export interface PricingPackage {
-id: string;
-title: string;
-price: number;
-description: string;
-features: string[];
-isPopular: boolean;
-ctaLabel: string;
+
+export type ShowcaseProject =
+  | (ShowcaseBase & { category: "Portfolios" })
+  | (ShowcaseBase & { category: "Landing Pages" })
+  | (ShowcaseBase & { category: "Web Apps" });
+
+export interface PricingTier {
+  id: string;
+  name: string;
+  price: number | null;
+  description: string;
+  features: string[];
+  isPopular: boolean;
+  ctaLabel: string;
 }
+
 export interface InquiryFormData {
-name: string;
-phone: string;
-email: string;
-projectType: string;
-budgetRange: string;
-timeline: string;
-details: string;
+  name: string;
+  contact: string;
+  projectType: string;
+  budget: string;
+  details: string;
 }
